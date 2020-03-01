@@ -53,6 +53,50 @@ public:
 };
 ```
 
+另一种就是常见的快速排序， 写法很多， 这里就只写我习惯的一种排法
+
+其中的helper函数也就是kth element中会用到的partition函数
+
+快排之中会有一些细节的地方需要注意
+
+首先是整体的算法：
+
+```c++
+1. [pivot, left, ..............................., right];
+2. [lstart, ......., lend, pivot, rstart, ......., rend];
+3. quicksort(lstart, lend)|pivot| quicksort(rstart,rend);      
+```
+
+然后细节上是边界条件：
+
+标在代码的注释之中了，注意通过直接在while里做加减的方式， 保证了不会死循环
+
+```c++
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        helper(nums, 0, nums.size()-1);
+        return nums;
+    }
+    // left, right 为数组的左右边界
+    void helper(vector<int>& nums, int left, int right){
+        if(left >= right) return;
+        // 这样设置pivot可以保证一定会进入循环
+        // 才可以保证r一定是移动到了>=pivot的位置上
+        // 防止出现 2，3 这样只有两个元素的情形，没进入循环导致交换变为 3，2
+        int pivot = nums[left], l = left, r = right + 1;
+        while(l < r){
+            while(l < right && nums[++l] <= pivot);
+            while(r > left && nums[--r] >= pivot);
+            if(l < r) swap(nums[l], nums[r]);
+        }
+        swap(nums[left], nums[r]);
+        helper(nums, left, r-1);
+        helper(nums, r+1, right);
+    }
+};
+```
+
 
 
 
