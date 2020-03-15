@@ -1,2 +1,2 @@
 # MyLeetCodePractice
-Just Record my progress on leetcode practising
+Record my progress on leetcode practising
