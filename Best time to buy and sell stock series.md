@@ -107,3 +107,27 @@ public:
 };
 ```
 
+
+
+**This also works for problem 309. Best Time to Buy and Sell Stock with Cooldown.**
+For problem 309, the recursive formula is
+
+```c++
+dp[i] = max(dp[i-1], prices[i] - prices[j] + dp[j-2]), j=[0..i-1]
+```
+
+If we sell the shares on i-th day bought on j-th day, we couldn't trade on (j-1)-th day because of cooldown. So the last one is dp[j-2].
+The straight implementation is:
+
+```java
+public int MaxProfit(int[] prices) {
+    if (prices.Length < 2) return 0;
+    var dp = new int[prices.Length + 1]; // use 1 more to guard
+    int min = prices[0];
+    for (int i = 1; i < prices.Length; i++) {
+        min = Math.Min(min, prices[i] - dp[i-1]);
+        dp[i+1] = Math.Max(dp[i], prices[i] - min);
+    }
+    return dp[dp.Length-1];
+}
+```
