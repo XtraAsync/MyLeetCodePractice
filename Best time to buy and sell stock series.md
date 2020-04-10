@@ -1,6 +1,12 @@
+这个系列最难的是三四题， 其实本质是一样的， 第四题是第三题的推广， 前两题解法比较显而易见
 
+直接看一下第四题的解法即可
 
-所以最基本形式的解法如下
+```c++
+dp[k, i] = max(dp[k, i-1], prices[i] - prices[j] + dp[k-1, j-1]), j=[0..i-1]
+```
+
+最基本形式的解法如下
 
 时间复杂度 o(kn^2)
 
@@ -64,11 +70,15 @@ public:
 };
 ```
 
+我们发现，每一次新的dp\[k][i] 只和 dp\[k][i-1] 以及 dp\[k-1][i] 有关， 即在dp表中只与上面的值和左面的值有关，所以我们可以通过这种方式 省去一个维度的空间，一般来说对于本题的场景：price明显还是比k长的， 因此我们希望是向下遍历的， 所以需要交换一下两个for循环的顺序
 
+由于本题目的时间限制卡的比较严格， 因此需要在额外给一个corner case的快速优化过程，防止TLE
+
+这里面我们主要考虑 有大量的允许的transcation 的情况， 那这里我们只需要把这道题退化到
+
+best time to buy and sell... II 的情形
 
 ![](https://github.com/crVainglory/MyLeetCodePractice/blob/master/images/best%20time%20to%20buy%20and%20sell%20stock.jpg)
-
-
 
 ```c++
 class Solution {
