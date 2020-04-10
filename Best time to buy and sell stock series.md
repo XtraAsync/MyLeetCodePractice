@@ -66,11 +66,7 @@ public:
 
 
 
-```c++
-
-```
-
-
+![](https://github.com/crVainglory/MyLeetCodePractice/blob/master/images/best%20time%20to%20buy%20and%20sell%20stock.jpg)
 
 
 
