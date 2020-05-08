@@ -21,7 +21,7 @@ int random10(){
     int x=49;
     while(x>40){
       	// 1-49
-        x = random7()*(random7()-1)+random7();
+        x = 7 * (random7()-1)+random7();
     }
     return x%10+1;
 }
